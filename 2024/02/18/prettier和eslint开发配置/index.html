@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>prettier+eslint | Nick-blog</title><meta name="author" content="Nick"><meta name="copyright" content="Nick"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Prettier 和 Eslint记录开发中Prettier和Eslint相关的配置，为什么开发中需要这两个东西呢？因为项目中可能是多人协作的情况，如果是一个人写一个项目，倒不用关心代码风格的问题。多人协作，代码风格可能不同，需要Prettier和Eslint这样的工具统一代码格式和语法风格，同一格式的代码对代码阅读是有好处的。 .editorConfig编辑器配置，在vscode上查找插件Edi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="prettier+eslint">
+<meta property="og:url" content="https://ldf1235.github.io/blog/2024/02/18/prettier%E5%92%8Ceslint%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Nick-blog">
+<meta property="og:description" content="Prettier 和 Eslint记录开发中Prettier和Eslint相关的配置，为什么开发中需要这两个东西呢？因为项目中可能是多人协作的情况，如果是一个人写一个项目，倒不用关心代码风格的问题。多人协作，代码风格可能不同，需要Prettier和Eslint这样的工具统一代码格式和语法风格，同一格式的代码对代码阅读是有好处的。 .editorConfig编辑器配置，在vscode上查找插件Edi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ldf1235.github.io/blog/assets/img/avatar.png">
+<meta property="article:published_time" content="2024-02-18T14:16:22.000Z">
+<meta property="article:modified_time" content="2024-02-19T03:29:29.503Z">
+<meta property="article:author" content="Nick">
+<meta property="article:tag" content="frontend developer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ldf1235.github.io/blog/assets/img/avatar.png"><link rel="shortcut icon" href="/blog/assets/img/avatar.png"><link rel="canonical" href="https://ldf1235.github.io/blog/2024/02/18/prettier%E5%92%8Ceslint%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/blog/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'prettier+eslint',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-19 11:29:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/blog/assets/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/blog/" title="Nick-blog"><span class="site-name">Nick-blog</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">prettier+eslint</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-18T14:16:22.000Z" title="发表于 2024-02-18 22:16:22">2024-02-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-02-19T03:29:29.503Z" title="更新于 2024-02-19 11:29:29">2024-02-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/webpack/">webpack</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Prettier-和-Eslint"><a href="#Prettier-和-Eslint" class="headerlink" title="Prettier 和 Eslint"></a>Prettier 和 Eslint</h1><p>记录开发中<code>Prettier</code>和<code>Eslint</code>相关的配置，为什么开发中需要这两个东西呢？因为项目中可能是多人协作的情况，如果是一个人写一个项目，倒不用关心代码风格的问题。多人协作，代码风格可能不同，需要<code>Prettier</code>和<code>Eslint</code>这样的工具统一代码格式和语法风格，同一格式的代码对代码阅读是有好处的。</p>
+<h2 id="editorConfig"><a href="#editorConfig" class="headerlink" title=".editorConfig"></a>.editorConfig</h2><p>编辑器配置，在<code>vscode</code>上查找插件<code>EditorConfig for VS Code</code>并安装，添加以下配置，更多配置前往<a target="_blank" rel="noopener" href="https://editorconfig.org/">editorconfig</a>查阅。</p>
+<p>配置说明：</p>
+<ul>
+<li><code>indent_style = space</code> 用空格缩进</li>
+<li><code>indent_size = 2</code> 缩进 2 格</li>
+<li><code>charset = utf-8</code> 字符集<code>utf-8</code></li>
+<li><code>trim_trailing_whitespace = true</code> 去除尾部空格</li>
+<li><code>insert_final_newline = true</code> 文件尾部添加新行</li>
+</ul>
+<p>使用方法：在项目的根目录创建<code>.editorconfig</code>文件，并复制下列配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root = true</span><br><span class="line"></span><br><span class="line">[*]</span><br><span class="line">indent_style = space</span><br><span class="line">indent_size = 2</span><br><span class="line">charset = utf-8</span><br><span class="line">trim_trailing_whitespace = true</span><br><span class="line">insert_final_newline = true</span><br><span class="line"></span><br><span class="line">[*.md]</span><br><span class="line">trim_trailing_whitespace = false</span><br></pre></td></tr></table></figure>
+
+<h2 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a>Prettier</h2><p>使用方法：在根目录下创建文件 <code>.prettierrc.js</code>，并复制代码。（更多配置前往<a target="_blank" rel="noopener" href="https://prettier.io/">prettier</a>查阅）<br>安装<code>vscode</code>插件：<code>Prettier - Code formatter</code></p>
+<p>其中插件<code>prettier-plugin-tailwindcss</code>和属性<code>tailwindConfig</code>需要结合<code>tailwindcss</code>使用，如果不使用<code>tailwindcss</code>，不需要添加这些配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">printWidth</span>: <span class="number">120</span>,</span><br><span class="line">  <span class="attr">tabWidth</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">useTabs</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">semi</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">singleQuote</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">quoteProps</span>: <span class="string">&#x27;as-needed&#x27;</span>,</span><br><span class="line">  <span class="attr">jsxSingleQuote</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">trailingComma</span>: <span class="string">&#x27;all&#x27;</span>,</span><br><span class="line">  <span class="attr">bracketSpacing</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">bracketSameLine</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">arrowParens</span>: <span class="string">&#x27;avoid&#x27;</span>,</span><br><span class="line">  <span class="attr">rangeStart</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">rangeEnd</span>: <span class="title class_">Infinity</span>,</span><br><span class="line">  <span class="attr">requirePragma</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">insertPragma</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">proseWrap</span>: <span class="string">&#x27;preserve&#x27;</span>,</span><br><span class="line">  <span class="attr">htmlWhitespaceSensitivity</span>: <span class="string">&#x27;css&#x27;</span>,</span><br><span class="line">  <span class="attr">endOfLine</span>: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">  <span class="attr">embeddedLanguageFormatting</span>: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">  <span class="attr">singleAttributePerLine</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;prettier-plugin-tailwindcss&#x27;</span>, <span class="string">&#x27;prettier-plugin-organize-imports&#x27;</span>],</span><br><span class="line">  <span class="attr">tailwindConfig</span>: <span class="string">&#x27;./tailwind.config.js&#x27;</span>,</span><br><span class="line">  <span class="attr">organizeImportsSkipDestructiveCodeActions</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Eslint-和-Prettier"><a href="#Eslint-和-Prettier" class="headerlink" title="Eslint 和 Prettier"></a>Eslint 和 Prettier</h2><p>安装<code>vscode</code>插件：<code>ESlint</code>。<br>配置项<code>rules</code>里面的规则可以根据团队要求来配置。<br>使用方法：在项目根目录下创建<code>.eslintrc.js</code>，并复制相关配置，由于<code>Eslint</code>和<code>Prettier</code>在一起使用时会产生冲突，所以需要安装一些包处理冲突。</p>
+<p>必须安装的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install eslint prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>react 项目使用的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install eslint-plugin-react eslint-plugin-react-hooks -D</span><br></pre></td></tr></table></figure>
+
+<p>typescript 项目使用的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install @typescript-eslint/parser @typescript-eslint/eslint-plugin -D</span><br></pre></td></tr></table></figure>
+
+<p>解决<code>Eslint</code>和<code>Prettier</code>冲突的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install eslint-config-prettier eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>eslint-config-prettier</code>：会关闭<code>Eslint</code>中代码格式化的功能，代码格式化交给<code>Prettier</code>来做，<code>Eslint</code>只处理语法检查。</li>
+<li><code>eslint-plugin-prettier</code>：将<code>Prettier</code>配置成<code>Eslint</code>的一个插件。</li>
+</ul>
+<p><code>javascript</code>项目使用的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">env</span>: &#123; <span class="attr">browser</span>: <span class="literal">true</span>, <span class="attr">es2020</span>: <span class="literal">true</span>, <span class="attr">node</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">  <span class="attr">extends</span>: [</span><br><span class="line">    <span class="string">&#x27;eslint:recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:react/recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:react/jsx-runtime&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:react-hooks/recommended&#x27;</span>,</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">parserOptions</span>: &#123; <span class="attr">ecmaVersion</span>: <span class="string">&#x27;latest&#x27;</span>, <span class="attr">sourceType</span>: <span class="string">&#x27;module&#x27;</span> &#125;,</span><br><span class="line">  <span class="attr">settings</span>: &#123; <span class="attr">react</span>: &#123; <span class="attr">version</span>: <span class="string">&#x27;18.2&#x27;</span> &#125; &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;react-refresh&#x27;</span>],</span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;react-refresh/only-export-components&#x27;</span>: <span class="string">&#x27;warn&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;react/prop-types&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>typescript</code>项目使用的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 解析器</span></span><br><span class="line">  <span class="attr">parser</span>: <span class="string">&#x27;@typescript-eslint/parser&#x27;</span>,</span><br><span class="line">  <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">    <span class="attr">project</span>: <span class="string">&#x27;tsconfig.json&#x27;</span>,</span><br><span class="line">    <span class="attr">sourceType</span>: <span class="string">&#x27;module&#x27;</span>,</span><br><span class="line">    <span class="attr">ecmaFeatures</span>: &#123;</span><br><span class="line">      <span class="attr">jsx</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">tsconfigRootDir</span>: __dirname,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 拓展插件</span></span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;@typescript-eslint&#x27;</span>],</span><br><span class="line">  <span class="comment">// 继承规则</span></span><br><span class="line">  <span class="attr">extends</span>: [</span><br><span class="line">    <span class="string">&#x27;eslint:recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:react/recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:@typescript-eslint/recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:react-hooks/recommended&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;plugin:prettier/recommended&#x27;</span>,</span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 以当前目录为根目录</span></span><br><span class="line">  <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="comment">// 当前运行环境</span></span><br><span class="line">  <span class="attr">env</span>: &#123;</span><br><span class="line">    <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// node: true,</span></span><br><span class="line">    <span class="attr">jest</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 额外的全局变量</span></span><br><span class="line">  <span class="attr">globals</span>: &#123;</span><br><span class="line">    <span class="comment">// jQuery: true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 忽略的规则</span></span><br><span class="line">  <span class="attr">ignorePatterns</span>: [<span class="string">&#x27;.eslintrc.js&#x27;</span>, <span class="string">&#x27;config/**&#x27;</span>, <span class="string">&#x27;craco.config.js&#x27;</span>, <span class="string">&#x27;setupProxy.js&#x27;</span>],</span><br><span class="line">  <span class="comment">// 配置规则</span></span><br><span class="line">  <span class="comment">// off 或 0：关闭 ;  warn 或 1：警告 ; error 或 2：报错 ;</span></span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;prettier/prettier&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">eqeqeq</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/no-empty-function&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/interface-name-prefix&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/explicit-function-return-type&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/explicit-module-boundary-types&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/no-explicit-any&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/no-non-null-assertion&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/no-non-null-asserted-optional-chain&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;@typescript-eslint/ban-ts-comment&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;react/jsx-closing-bracket-location&#x27;</span>: [<span class="number">1</span>, <span class="string">&#x27;tag-aligned&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;react/react-in-jsx-scope&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;react/jsx-no-duplicate-props&#x27;</span>: [<span class="number">2</span>, &#123; <span class="attr">ignoreCase</span>: <span class="literal">false</span> &#125;],</span><br><span class="line">    <span class="string">&#x27;react/jsx-max-props-per-line&#x27;</span>: [<span class="number">1</span>, &#123; <span class="attr">maximum</span>: <span class="number">1</span>, <span class="attr">when</span>: <span class="string">&#x27;multiline&#x27;</span> &#125;],</span><br><span class="line">    <span class="string">&#x27;react/prop-types&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;react/display-name&#x27;</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">&#x27;react/jsx-boolean-value&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">&#x27;react-hooks/rules-of-hooks&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">&#x27;react-hooks/exhaustive-deps&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 覆盖规则（示例）</span></span><br><span class="line">  <span class="attr">overrides</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">files</span>: [<span class="string">&#x27;*-test.js&#x27;</span>, <span class="string">&#x27;*.spec.js&#x27;</span>],</span><br><span class="line">      <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-unused-expressions&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">settings</span>: &#123;</span><br><span class="line">    <span class="attr">react</span>: &#123;</span><br><span class="line">      <span class="attr">version</span>: <span class="string">&#x27;detect&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/2024/02/18/webpack%E7%94%9F%E4%BA%A7%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B/" title="webpack生产配置示例"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">webpack生产配置示例</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/blog/assets/img/avatar.png" onerror="this.onerror=null;this.src='/blog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Nick</div><div class="author-info__description">frontend developer</div></div><div class="card-info-data site-data is-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Prettier-%E5%92%8C-Eslint"><span class="toc-number">1.</span> <span class="toc-text">Prettier 和 Eslint</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#editorConfig"><span class="toc-number">1.1.</span> <span class="toc-text">.editorConfig</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prettier"><span class="toc-number">1.2.</span> <span class="toc-text">Prettier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Eslint-%E5%92%8C-Prettier"><span class="toc-number">1.3.</span> <span class="toc-text">Eslint 和 Prettier</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js?v=4.12.0"></script><script src="/blog/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><div class="docsearch-wrap"><div id="docsearch" style="display:none"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3.5.2/dist/style.min.css"/><script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.5.2/dist/umd/index.min.js"></script><script>(() => {
+  docsearch(Object.assign({
+    appId: 'BUXPXH78H5',
+    apiKey: 'dc58ed4dd1c96127a33437ab2af4ae9a',
+    indexName: 'ldf1235io',
+    container: '#docsearch',
+  }, null))
+
+  const handleClick = () => {
+    document.querySelector('.DocSearch-Button').click()
+  }
+
+  const searchClickFn = () => {
+    btf.addEventListenerPjax(document.querySelector('#search-button > .search'), 'click', handleClick)
+  }
+
+  searchClickFn()
+  window.addEventListener('pjax:complete', searchClickFn)
+})()</script></div></div></body></html>
